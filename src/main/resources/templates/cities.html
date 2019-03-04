@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <title>Starbucks</title>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>City</th>
+                    <th>Location</th>
+                    <th>Population</th>
+                    <th>State</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="city : ${cities}">
+                    <td th:text="${city._id}"></td>
+                    <td th:text="${city.city}"></td>
+                    <td th:text="${#strings.arrayJoin(city.loc, ' ')}"></td>
+                    <td th:text="${city.pop}"></td>
+                    <td th:text="${city.state}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>

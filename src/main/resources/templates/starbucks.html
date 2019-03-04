@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <title>Starbucks</title>
+    <script>
+        $("#table tr").click(function() {
+            window.location = $(this).find('td:eq(5)').attr("href");
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Street</th>
+                    <th>Name</th>
+                    <th>Longitude</th>
+                    <th>Latitude</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Postal Code</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="starbuck : ${starbucks}">
+                        <td th:text="${starbuck.street_combined}"></td>
+                        <td th:text="${starbuck.name}"></td>
+                        <td th:text="${starbuck.longitude}"></td>
+                        <td th:text="${starbuck.latitude}"></td>
+                        <td th:text="${starbuck.country}"></td>
+                        <td  th:text="${starbuck.city}" th:href="@{/starbucks/searchCity?city=__${starbuck.city}__}"></td>
+                        <td th:text="${starbuck.postal_code}"></td>
+                        <td>
+                            <a th:href="@{/starbucks/searchCity?city=__${starbuck.city}__}">
+                                <button class="btn">Buscar Ciudad</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>
