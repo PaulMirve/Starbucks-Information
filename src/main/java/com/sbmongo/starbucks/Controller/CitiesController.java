@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/starbucks")
@@ -34,34 +34,28 @@ public class CitiesController {
     @GetMapping("/searchCity")
     public ModelAndView searchCity(@RequestParam(name = "city", required = false)String city){
         ModelAndView mav = new ModelAndView(ViewConstant.CITIES);
-        //System.out.println(citiesRepository.findByCity("Toronto"));
         mav.addObject("cities", citiesRepository.findByCity(city.toUpperCase()));
         return mav;
     }
 
-    @GetMapping("/showchart")
-    public ModelAndView showChart(Model model){
-        ModelAndView mav = new ModelAndView(ViewConstant.CHART);
-        //first, add the regional sales
-        Integer northeastSales = 17089;
-        Integer westSales = 10603;
-        Integer midwestSales = 5223;
-        Integer southSales = 10111;
-
-        model.addAttribute("northeastSales", northeastSales);
-        model.addAttribute("southSales", southSales);
-        model.addAttribute("midwestSales", midwestSales);
-        model.addAttribute("westSales", westSales);
-
-        //now add sales by lure type
-        List<Integer> inshoreSales = Arrays.asList(4074, 3455, 4112);
-        List<Integer> nearshoreSales = Arrays.asList(3222, 3011, 3788);
-        List<Integer> offshoreSales = Arrays.asList(7811, 7098, 6455);
-
-        model.addAttribute("inshoreSales", inshoreSales);
-        model.addAttribute("nearshoreSales", nearshoreSales);
-        model.addAttribute("offshoreSales", offshoreSales);
-
-        return mav;
+    @GetMapping("/pieChart")
+    public String pieChart(Model model){
+        List<Cities> citiesList = citiesRepository.findAll();
+        //Takes only the element City of the MongoDB and puts them in a list called citiesNames
+        List<String> citiesNames = citiesList.stream().map(Cities::getCity).collect(Collectors.toList());
+        //Cleans the repeated cities
+        Set<String> uniqueCities = new HashSet<>(citiesNames);
+        citiesNames.clear();
+        citiesNames.addAll(uniqueCities);
+        model.addAttribute("listCities", citiesNames);
+        /*For each city en citiesNames variable, the loop is going to send to the view the name of the cities and the count
+        of how much cities there are in that city*/
+        for(int x = 0; x<3; x++){
+            List<Cities> numeroCiudades = citiesRepository.findByCity(citiesNames.get(x));
+            model.addAttribute(citiesNames.get(x),numeroCiudades.size());
+        }
+        return "pieCharts";
     }
+
+
 }
