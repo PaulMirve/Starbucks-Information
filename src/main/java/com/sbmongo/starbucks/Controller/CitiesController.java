@@ -50,10 +50,16 @@ public class CitiesController {
         model.addAttribute("listCities", citiesNames);
         /*For each city en citiesNames variable, the loop is going to send to the view the name of the cities and the count
         of how much cities there are in that city*/
-        for(int x = 0; x<3; x++){
-            List<Cities> numeroCiudades = citiesRepository.findByCity(citiesNames.get(x));
-            model.addAttribute(citiesNames.get(x),numeroCiudades.size());
+        System.out.println(citiesNames.size());
+        System.out.println(citiesNames.get(12345));
+        List<Integer> numbers = new ArrayList<Integer>();
+        List<Cities> numeroCiudades = new ArrayList<Cities>();
+        for(int x=0; x<5;x++){
+            numeroCiudades = citiesRepository.findByCity(citiesNames.get(x));
+            numbers.add(numeroCiudades.size());
+            System.out.println(x);
         }
+        model.addAttribute("numbers",numbers);
         return "pieCharts";
     }
 
