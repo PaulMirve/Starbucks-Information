@@ -40,6 +40,45 @@ public class CitiesController {
 
     @GetMapping("/pieChart")
     public String pieChart(Model model){
+        /*The names of the cities are taken by the method namesOfCities */
+        List<String> citiesNames = namesOfCities();
+        model.addAttribute("listCities", citiesNames);
+        /* Create a list of with the name numbers that will contain the count of establishments per city. To insert
+        the data in the list I use the method countByCity who's going to count the number of
+        * establishments in each city. The count of cities is going to be stored in the list numbers*/
+        List<Integer> numbers = new ArrayList<Integer>();
+        for(int x=0; x<10;x++){
+            numbers.add(citiesRepository.countByCity(citiesNames.get(x)));
+        }
+        model.addAttribute("numbers",numbers);
+        return "pieCharts";
+    }
+
+    /*Send a cutted version of the cities names to the view for creating the checkbox for each city in the list*/
+    @GetMapping("/selectCities")
+    public ModelAndView selectCities(Model model){
+        ModelAndView mav = new ModelAndView(ViewConstant.SELECT_CITIES);
+        List<String> citiesNames = recortarList();
+        model.addAttribute("namesOfCities", citiesNames);
+        return mav;
+    }
+
+    @GetMapping("/showSelectedCities")
+    public ModelAndView showSelectedCities(@RequestParam(name = "lista", required = false)String[] names,
+                                           Model model){
+        /*RequestParam receive the names of the cities selected by the checkbox and save them in the variable names*/
+        ModelAndView mav = new ModelAndView(ViewConstant.SELECT_CITIES);
+        /*Create a list in which I going to store the number of establishments per city*/
+        List<Integer> numberOfStablishments = new ArrayList<Integer>();
+        for(int x=0; x<names.length;x++){
+            numberOfStablishments.add(citiesRepository.countByCity(names[x]));
+        }
+        model.addAttribute("numberOfStablishments", numberOfStablishments);
+        model.addAttribute("selectedNames", names);
+        return mav;
+    }
+
+    public List<String> namesOfCities(){
         List<Cities> citiesList = citiesRepository.findAll();
         //Takes only the element City of the MongoDB and puts them in a list called citiesNames
         List<String> citiesNames = citiesList.stream().map(Cities::getCity).collect(Collectors.toList());
@@ -47,21 +86,16 @@ public class CitiesController {
         Set<String> uniqueCities = new HashSet<>(citiesNames);
         citiesNames.clear();
         citiesNames.addAll(uniqueCities);
-        model.addAttribute("listCities", citiesNames);
-        /*For each city en citiesNames variable, the loop is going to send to the view the name of the cities and the count
-        of how much cities there are in that city*/
-        System.out.println(citiesNames.size());
-        System.out.println(citiesNames.get(12345));
-        List<Integer> numbers = new ArrayList<Integer>();
-        List<Cities> numeroCiudades = new ArrayList<Cities>();
-        for(int x=0; x<5;x++){
-            numeroCiudades = citiesRepository.findByCity(citiesNames.get(x));
-            numbers.add(numeroCiudades.size());
-            System.out.println(x);
-        }
-        model.addAttribute("numbers",numbers);
-        return "pieCharts";
+        return citiesNames;
     }
 
-
+    /*This method return a cutted list of the names of the databases for test purposes*/
+    public List<String> recortarList(){
+        List<String> citiesNames = namesOfCities();
+        List<String> listaRecortada = new ArrayList<String>();
+        for(int x=0; x<10; x++){
+            listaRecortada.add(citiesNames.get(x));
+        }
+        return listaRecortada;
+    }
 }

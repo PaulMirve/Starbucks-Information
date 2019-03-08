@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1" />
+    <title>PIE</title>
+</head>
+<body>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="chart" style="height: 400px"></div>
+<script th:inline="javascript">
+
+    var listCities = /*[[${listCities}]]*/[];
+    var numbers = /*[[${numbers}]]*/[];
+    var array= [];
+    var City = function(name, data){
+        this.name = name;
+        this.data = data;
+    }
+
+    for(var x=0; x<numbers.length; x++){
+        array[x] = new City(listCities[x], numbers[x]);
+    }
+
+    var nombre = Array();
+    var data = Array();
+    var dataArrayFinal = Array();
+
+    for(i=0;i<array.length;i++) {
+        nombre[i] = array[i].name;
+        data[i] = array[i].data;
+    }
+    console.log(nombre);
+    for(var x=0; x<array.length;x++){
+        console.log(nombre[x]);
+        console.log(data[x]);
+    }
+
+    for(j=0;j<nombre.length;j++) {
+        var temp = new Array(nombre[j],data[j]);
+        dataArrayFinal[j] = temp;
+    }
+
+    console.log(dataArrayFinal);
+
+
+    Highcharts.chart('chart', {
+        chart : {
+            type : 'pie',
+            options3d : {
+                enabled : true,
+                alpha : 50,
+                beta : 0
+            }
+        },
+        title : {
+            text : 'Starbucks for Each City'
+        },
+        tooltip : {
+            pointFormat : '{series.name}: <b>{point.y:.1f}</b>'
+        },
+        plotOptions : {
+            pie : {
+                allowPointSelect : true,
+                cursor : 'pointer',
+                depth : 35,
+                dataLabels : {
+                    enabled : true,
+                    format : '{point.name}'
+                }
+            }
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Number of Stablishments',
+            data : dataArrayFinal
+        } ]
+    });
+</script>
+
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</body>
+</html>

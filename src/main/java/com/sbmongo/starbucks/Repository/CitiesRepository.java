@@ -11,5 +11,5 @@ import java.util.List;
 public interface CitiesRepository extends MongoRepository<Cities, String> {
     public Cities findBy_id(ObjectId _id);
     public List<Cities> findByCity(String city);
-    public List<Integer> countByCity(String city);
+    public int countByCity(String city);
 }
