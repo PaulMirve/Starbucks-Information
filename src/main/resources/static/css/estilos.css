@@ -1,0 +1,58 @@
+body{
+    background: #ee9953;
+}
+
+.btn{
+    background: white;
+}
+
+/*jumbotron*/
+.jumbotron{
+    background-image: url('../img/people.jpg');
+    background-size: cover;
+    min-height: 500px;
+}
+
+/*Navbar*/
+header .navbar{
+    background: #ce630c;
+}
+
+header .logo{
+    height: 50px;
+    width: 50px;
+    top:40px;
+    left: 50px;
+    float: left;
+}
+
+.opciones{
+    margin: 5px solid black;
+    background: blue;
+}
+
+/*Columnas de información*/
+.col-lg-3{
+    min-height: 300px;
+}
+
+.col-lg-3 .btn{
+    top: 100px;
+}
+
+@media (max-width:768px){
+    .col-12{
+        min-height: 33%;
+    }
+}
+
+/*Footer*/
+footer{
+    margin-top: 100px;
+    background: #ce630c;
+}
+
+footer .footer-copyright a{
+    text-decoration: none;
+    color: #ffffff;
+}

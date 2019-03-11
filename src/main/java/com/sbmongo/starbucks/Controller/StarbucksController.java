@@ -17,6 +17,12 @@ public class StarbucksController {
     @Qualifier("starbucksRepository")
     private StarbucksRepository starbucksRepository;
 
+    @GetMapping("/index")
+    public ModelAndView index(){
+        ModelAndView mav = new ModelAndView(ViewConstant.INDEX);
+        return mav;
+    }
+
     @GetMapping("/info")
     public ModelAndView listInfo(){
         ModelAndView mav = new ModelAndView(ViewConstant.STARBUCKS);

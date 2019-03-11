@@ -56,25 +56,21 @@ public class CitiesController {
 
     /*Send a cutted version of the cities names to the view for creating the checkbox for each city in the list*/
     @GetMapping("/selectCities")
-    public ModelAndView selectCities(Model model){
+    public ModelAndView selectCities(Model model,
+                                     @RequestParam(name = "lista", required = false)String[] names){
         ModelAndView mav = new ModelAndView(ViewConstant.SELECT_CITIES);
         List<String> citiesNames = recortarList();
         model.addAttribute("namesOfCities", citiesNames);
-        return mav;
-    }
-
-    @GetMapping("/showSelectedCities")
-    public ModelAndView showSelectedCities(@RequestParam(name = "lista", required = false)String[] names,
-                                           Model model){
-        /*RequestParam receive the names of the cities selected by the checkbox and save them in the variable names*/
-        ModelAndView mav = new ModelAndView(ViewConstant.SELECT_CITIES);
-        /*Create a list in which I going to store the number of establishments per city*/
         List<Integer> numberOfStablishments = new ArrayList<Integer>();
-        for(int x=0; x<names.length;x++){
-            numberOfStablishments.add(citiesRepository.countByCity(names[x]));
+        if(names != null){
+            for(int x=0; x<names.length;x++){
+                numberOfStablishments.add(citiesRepository.countByCity(names[x]));
+            }
+
+            model.addAttribute("numberOfStablishments", numberOfStablishments);
+            model.addAttribute("selectedNames", names);
         }
-        model.addAttribute("numberOfStablishments", numberOfStablishments);
-        model.addAttribute("selectedNames", names);
+
         return mav;
     }
 

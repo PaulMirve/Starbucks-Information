@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <title>Index</title>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <img src="../img/coffee.png" alt="" class="logo navbar-brand">
+                <a href="" class="navbar-brand">Tasty Coffee</a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+                    aria-expanded="false" aria-label="Menú de Navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a href="/starbucks/info" class="nav-link">Establecimeintos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/starbucks/selectCities" class="nav-link">Estádisticas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/starbucks/cities" class="nav-link">Ciudades</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="jumbotron"></div>
+    <div class="container">
+        <div class="row my-3 d-flex flex-column">
+            <div class="d-flex flex-column flex-lg-row justify-content-lg-between">
+                <div class="col-12 col-lg-3 text-center border rounded p-3 d-flex flex-column">
+                    <h2>Establecimientos</h2>
+                    <p>Conoce los lugares donde estamos presentes</p>
+                    <a href="/starbucks/info" class="btn btn-block mt-auto">Ir</a>
+                </div>
+                <div class="col-12 col-lg-3 text-center border rounded p-3 d-flex flex-column">
+                    <h2>Estádisticas</h2>
+                    <p>Selecciona las ciudades para conocer el número de establecimientos por ciudad</p>
+                    <a href="/starbucks/selectCities" class="btn btn-block mt-auto">Ir</a>
+                </div>
+                <div class="col-12 col-lg-3 text-center border rounded p-3 d-flex flex-column">
+                    <h2>Ciudades</h2>
+                    <p>Averigua si estamos en tu ciudad</p>
+                    <a href="/starbucks/cities" class="btn btn-block align-self-end mt-auto">Ir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer font-small blue mt-auto">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="#"> Paul Miranda Vega</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</body>
+
+</html>

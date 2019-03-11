@@ -5,4 +5,5 @@ public class ViewConstant {
     public static final String CITIES = "cities";
     public static final String CHART = "showchart";
     public static final String SELECT_CITIES = "selectCities";
+    public static final String INDEX = "index";
 }

@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row align-items-center">
         <div class="col-4 mt-3">
-            <form th:action="@{/starbucks/showSelectedCities}" method="get">
+            <form th:action="@{/starbucks/selectCities}" method="get">
                 <div class="form-check"  th:each="names, iterStat : ${namesOfCities}">
                         <label for="" class="form-check-label">
                         <input type="checkbox"  name="lista" th:value="${names}" th:text="${names}">
