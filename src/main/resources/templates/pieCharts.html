@@ -1,10 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1" />
+    <meta charset="UTF-8" />
     <title>PIE</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <img src="../img/coffee.png" alt="" class="logo navbar-brand">
+            <a href="" class="navbar-brand">Tasty Coffee</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+                    aria-expanded="false" aria-label="Menú de Navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="/starbucks/info" class="nav-link">Establecimeintos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/starbucks/selectCities" class="nav-link">Estádisticas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/starbucks/cities" class="nav-link">Ciudades</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>

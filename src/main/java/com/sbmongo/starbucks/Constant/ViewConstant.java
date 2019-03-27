@@ -6,4 +6,6 @@ public class ViewConstant {
     public static final String CHART = "showchart";
     public static final String SELECT_CITIES = "selectCities";
     public static final String INDEX = "index";
+    public static final String BAR_CHART = "barCharts";
+    public static final String SELECT_CHART = "typeOfChart";
 }

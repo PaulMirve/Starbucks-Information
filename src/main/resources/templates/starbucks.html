@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <title>Starbucks</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilos.css">
     <script>
         $("#table tr").click(function() {
             window.location = $(this).find('td:eq(5)').attr("href");
@@ -14,9 +17,36 @@
 </head>
 <body>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col">
-            <table class="table table-hover">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <img src="../img/coffee.png" alt="" class="logo navbar-brand">
+                <a href="/starbucks/index" class="navbar-brand">Tasty Coffee</a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+                        aria-expanded="false" aria-label="Menú de Navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a href="/starbucks/info" class="nav-link">Establecimientos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/starbucks/selectCities" class="nav-link">Estádisticas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/starbucks/cities" class="nav-link">Ciudades</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="row justify-content-center seleccionadores">
+        <div class="col-12">
+            <table class="table table-hover table-bordered table-sm table-responsive-md">
                 <thead>
                 <tr>
                     <th>Street</th>

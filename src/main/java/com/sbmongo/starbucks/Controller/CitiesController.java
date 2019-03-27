@@ -59,8 +59,27 @@ public class CitiesController {
     public ModelAndView selectCities(Model model,
                                      @RequestParam(name = "lista", required = false)String[] names){
         ModelAndView mav = new ModelAndView(ViewConstant.SELECT_CITIES);
+        sendSelectedCities(model, names);
+        return mav;
+    }
+
+    @GetMapping("/barCharts")
+    public ModelAndView barCharts(Model model){
+        ModelAndView mav = new ModelAndView(ViewConstant.BAR_CHART);
+        sendFirstTen(model);
+        return mav;
+    }
+
+
+    public void sendSelectedCities(Model model, String[] names){
+        ModelAndView mav = new ModelAndView(ViewConstant.SELECT_CITIES);
+        /*This list takes only the first 10 names of the DB and send it to the view for make a checkbox for each
+         * element in the list*/
         List<String> citiesNames = recortarList();
         model.addAttribute("namesOfCities", citiesNames);
+        /*I loops the variable 'names' that recieve the names selected by the checkboxes and count the number of
+         * establishments for each name in the variable 'names'. After that it send it to the view for be used by the
+         * highcharts*/
         List<Integer> numberOfStablishments = new ArrayList<Integer>();
         if(names != null){
             for(int x=0; x<names.length;x++){
@@ -70,8 +89,19 @@ public class CitiesController {
             model.addAttribute("numberOfStablishments", numberOfStablishments);
             model.addAttribute("selectedNames", names);
         }
+    }
 
-        return mav;
+    /*This method uses the recortarList() method to take the first 10 names of the cities names list and send it to
+    * the view for use them in the highchart names section. After that it counts the number of establishments per city
+    * in each name of the citiesNames list*/
+    public void sendFirstTen(Model model){
+        List<String> citiesNames = recortarList();
+        model.addAttribute("namesOfCities", citiesNames);
+        List<Integer> numberOfStablishments = new ArrayList<Integer>();
+        for(int x=0; x<citiesNames.size(); x++){
+            numberOfStablishments.add(citiesRepository.countByCity(citiesNames.get(x)));
+        }
+        model.addAttribute("numberOfStablishments",numberOfStablishments);
     }
 
     public List<String> namesOfCities(){

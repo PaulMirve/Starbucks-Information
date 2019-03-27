@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bar Charts</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <img src="../img/coffee.png" alt="" class="logo navbar-brand">
+                <a href="/starbucks/index" class="navbar-brand">Tasty Coffee</a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+                        aria-expanded="false" aria-label="Menú de Navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a href="/starbucks/info" class="nav-link">Establecimientos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/starbucks/selectCities" class="nav-link">Estádisticas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/starbucks/cities" class="nav-link">Ciudades</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+</div>
+<div class="row seleccionadores">
+    <div class="col-12">
+        <div id="chart"></div>
+    </div>
+</div>
+
+
+<footer>
+    <div class="container-fluid text-center p-3 w-100">
+        <p>© 2019 Copyright:<a href="#"> Paul Miranda Vega</a></p>
+    </div>
+</footer>
+
+
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script th:inline="javascript">
+
+    var selectedNames = /*[[${namesOfCities}]]*/[];
+    var numberOfStablishments = /*[[${numberOfStablishments}]]*/[];
+    var array= [];
+    var City = function(name, data){
+        this.name = name;
+        this.data = data;
+    }
+
+    for(var x=0; x<numberOfStablishments.length; x++){
+        array[x] = new City(selectedNames[x], numberOfStablishments[x]);
+    }
+
+    var nombre = Array();
+    var data = Array();
+    var dataArrayFinal = Array();
+
+    for(i=0;i<array.length;i++) {
+        nombre[i] = array[i].name;
+        data[i] = array[i].data;
+    }
+
+    for(j=0;j<nombre.length;j++) {
+        var temp = new Array(nombre[j],data[j]);
+        dataArrayFinal[j] = temp;
+    }
+
+    Highcharts.chart('chart', {
+        chart: {
+            backgroundColor: '#EE9953',
+            type: 'column'
+        },
+        title: {
+            text: 'World\'s largest cities per 2017'
+        },
+        subtitle: {
+            text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Population (millions)'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Population in 2017: <b>{point.y:.1f} millions</b>'
+        },
+        series: [{
+            name: 'Population',
+            data: dataArrayFinal,
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                format: '{point.y:.1f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+</script>
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>

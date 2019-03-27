@@ -6,13 +6,32 @@ body{
     background: white;
 }
 
+.nav-margin{
+    margin-top: 100px;
+}
+
+.container{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+h2{
+    font-weight: 700;
+}
+
 /*jumbotron*/
 .jumbotron{
-    background-image: url('../img/people.jpg');
+    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../img/people.jpg');
     background-size: cover;
     min-height: 500px;
 }
 
+
+.jumbotron p{
+
+    font-size: 25px;
+    font-weight: 400;
+    color: white;
+}
 /*Navbar*/
 header .navbar{
     background: #ce630c;
@@ -26,9 +45,8 @@ header .logo{
     float: left;
 }
 
-.opciones{
-    margin: 5px solid black;
-    background: blue;
+header .brand{
+    font-family: 'Pacifico', cursive;
 }
 
 /*Columnas de información*/
@@ -50,9 +68,25 @@ header .logo{
 footer{
     margin-top: 100px;
     background: #ce630c;
+    
+}
+
+footer a{
+    text-decoration: none;
+    color: #ffffff;
 }
 
 footer .footer-copyright a{
     text-decoration: none;
     color: #ffffff;
 }
+
+
+/********************selectChart*************************/
+.card-btn{
+    background: #ce630c;
+    color: #FFF;
+}
+
+
+/*************************selectCities*******************************/
